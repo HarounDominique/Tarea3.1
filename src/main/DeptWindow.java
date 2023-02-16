@@ -26,7 +26,7 @@ import modelo.Departamento;
 import modelo.servicio.DepartamentoServicio;
 import modelo.servicio.IDepartamentoServicio;
 
-public class TxWindow extends JFrame {
+public class DeptWindow extends JFrame {
 
 	/**
 	 * 
@@ -50,7 +50,7 @@ public class TxWindow extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TxWindow frame = new TxWindow();
+					DeptWindow frame = new DeptWindow();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -62,7 +62,7 @@ public class TxWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TxWindow() {
+	public DeptWindow() {
 
 		departamentoServicio = new DepartamentoServicio();
 
@@ -176,7 +176,7 @@ public class TxWindow extends JFrame {
 					btnModificarDepartamento.setEnabled((selectedIx > -1));
 					btnEliminarDepartamento.setEnabled((selectedIx > -1));
 					if (selectedIx > -1) {
-						Departamento d = (Departamento) TxWindow.this.JListAllDepts.getModel().getElementAt(selectedIx);
+						Departamento d = (Departamento) DeptWindow.this.JListAllDepts.getModel().getElementAt(selectedIx);
 						if (d != null) {
 							addMensaje(true, "Se ha seleccionado el d: " + d);
 						}
@@ -237,7 +237,7 @@ public class TxWindow extends JFrame {
 		try {
 			Departamento nuevo = departamentoServicio.saveOrUpdate(dept);
 			if (nuevo != null) {
-				addMensaje(true, "Se ha creado un departamento con id: " + nuevo.getDeptno());
+				addMensaje(true, "Se ha creado/actualizado un departamento con id: " + nuevo.getDeptno());
 				getAllDepartamentos();
 			} else {
 				addMensaje(true, " El departamento no se ha creado/actualizado correctamente");
