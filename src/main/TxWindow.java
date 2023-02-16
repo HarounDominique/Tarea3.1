@@ -96,20 +96,24 @@ public class TxWindow extends JFrame {
 		btnShowAllDepts.setBounds(50, 37, 208, 36);
 		panel.add(btnShowAllDepts);
 
-		JScrollPane scrollPanel_in_JlistAllDepts = new JScrollPane();
-		panel.add(scrollPanel_in_JlistAllDepts);
-
 		btnModificarDepartamento = new JButton("Modificar departamento");
 
 		JListAllDepts = new JList<Departamento>();
 
 		JListAllDepts.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-		panel.add(JListAllDepts);
+		
 		JListAllDepts.setBounds(403, 37, 377, 200);
 
-		JButton btnCrearNuevoDepartamento = new JButton("Crear nuevo departamento");
+		JScrollPane scrollPanel_in_JlistAllDepts = new JScrollPane(JListAllDepts);
+		scrollPanel_in_JlistAllDepts.setLocation(300, 0);
+		scrollPanel_in_JlistAllDepts.setSize(500, 250);
 		
+		panel.add(scrollPanel_in_JlistAllDepts);
+	
+
+		JButton btnCrearNuevoDepartamento = new JButton("Crear nuevo departamento");
+
 		btnCrearNuevoDepartamento.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnCrearNuevoDepartamento.setBounds(50, 85, 208, 36);
 		panel.add(btnCrearNuevoDepartamento);
@@ -125,8 +129,8 @@ public class TxWindow extends JFrame {
 		btnEliminarDepartamento.setEnabled(false);
 		btnEliminarDepartamento.setBounds(50, 201, 208, 36);
 		panel.add(btnEliminarDepartamento);
-		
-		//Eventos
+
+		// Eventos
 		ActionListener showAllDepartamentosActionListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				getAllDepartamentos();
@@ -145,7 +149,7 @@ public class TxWindow extends JFrame {
 			}
 		};
 		btnCrearNuevoDepartamento.addActionListener(crearListener);
-		
+
 		ActionListener modificarListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int selectedIx = JListAllDepts.getSelectedIndex();
@@ -162,7 +166,7 @@ public class TxWindow extends JFrame {
 				}
 			}
 		};
-		
+
 		btnModificarDepartamento.addActionListener(modificarListener);
 
 		ListSelectionListener selectionListListener = new ListSelectionListener() {
