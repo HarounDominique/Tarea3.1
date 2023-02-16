@@ -9,7 +9,7 @@
         <many-to-one class="modelo.Departamento" fetch="select" name="dept">
             <column name="DEPTNO"/>
         </many-to-one>
-        <many-to-one class="modelo.Emp" fetch="select" name="emp">
+        <many-to-one class="modelo.Empleado" fetch="select" name="jefe">
             <column name="MGR"/>
         </many-to-one>
         <property name="ename" type="string">
@@ -33,11 +33,11 @@
             </key>
             <one-to-many class="modelo.Account"/>
         </set>
-        <set fetch="select" inverse="true" lazy="true" name="emps" table="EMP">
+        <set fetch="select" inverse="true" lazy="true" name="subordinados" table="EMP">
             <key>
                 <column name="MGR"/>
             </key>
-            <one-to-many class="modelo.Emp"/>
+            <one-to-many class="modelo.Empleado"/>
         </set>
     </class>
 </hibernate-mapping>

@@ -12,11 +12,11 @@
         <property name="loc" type="string">
             <column length="20" name="LOC"/>
         </property>
-        <set fetch="select" inverse="true" lazy="true" name="emps" table="EMP">
+        <set fetch="select" inverse="true" lazy="true" name="subordinados" table="EMP">
             <key>
                 <column name="DEPTNO"/>
             </key>
-            <one-to-many class="modelo.Emp"/>
+            <one-to-many class="modelo.Empleado"/>
         </set>
     </class>
 </hibernate-mapping>
