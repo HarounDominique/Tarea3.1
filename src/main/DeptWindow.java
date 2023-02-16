@@ -25,6 +25,8 @@ import javax.swing.event.ListSelectionListener;
 import modelo.Departamento;
 import modelo.servicio.DepartamentoServicio;
 import modelo.servicio.IDepartamentoServicio;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class DeptWindow extends JFrame {
 
@@ -42,6 +44,8 @@ public class DeptWindow extends JFrame {
 	private CreateNewDeptDialog createDialog;
 	private JButton btnModificarDepartamento;
 	private JButton btnEliminarDepartamento;
+	private JLabel lblNewLabel;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -75,25 +79,25 @@ public class DeptWindow extends JFrame {
 		contentPane.setLayout(null);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(8, 8, 821, 500);
+		panel.setBounds(8, 8, 821, 714);
 		contentPane.add(panel);
 		panel.setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(19, 264, 669, 228);
+		scrollPane.setBounds(20, 440, 669, 228);
 		panel.add(scrollPane);
-
-		mensajes_text_Area = new JTextArea();
-		scrollPane.setViewportView(mensajes_text_Area);
-		mensajes_text_Area.setEditable(false);
-		mensajes_text_Area.setText("Panel de mensajes");
-		mensajes_text_Area.setForeground(new Color(255, 0, 0));
-		mensajes_text_Area.setFont(new Font("Monospaced", Font.PLAIN, 13));
+		
+				mensajes_text_Area = new JTextArea();
+				scrollPane.setViewportView(mensajes_text_Area);
+				mensajes_text_Area.setEditable(false);
+				mensajes_text_Area.setText("Panel de mensajes");
+				mensajes_text_Area.setForeground(new Color(255, 0, 0));
+				mensajes_text_Area.setFont(new Font("Monospaced", Font.PLAIN, 13));
 
 		JButton btnShowAllDepts = new JButton("Mostrar departamentos");
 
 		btnShowAllDepts.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnShowAllDepts.setBounds(50, 37, 208, 36);
+		btnShowAllDepts.setBounds(50, 155, 208, 36);
 		panel.add(btnShowAllDepts);
 
 		btnModificarDepartamento = new JButton("Modificar departamento");
@@ -115,20 +119,30 @@ public class DeptWindow extends JFrame {
 		JButton btnCrearNuevoDepartamento = new JButton("Crear nuevo departamento");
 
 		btnCrearNuevoDepartamento.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnCrearNuevoDepartamento.setBounds(50, 85, 208, 36);
+		btnCrearNuevoDepartamento.setBounds(50, 202, 208, 36);
 		panel.add(btnCrearNuevoDepartamento);
 
 		btnModificarDepartamento.setEnabled(false);
 		btnModificarDepartamento.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnModificarDepartamento.setBounds(50, 139, 208, 36);
+		btnModificarDepartamento.setBounds(50, 249, 208, 36);
 		panel.add(btnModificarDepartamento);
 
 		btnEliminarDepartamento = new JButton("Eliminar departamento");
 
 		btnEliminarDepartamento.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnEliminarDepartamento.setEnabled(false);
-		btnEliminarDepartamento.setBounds(50, 201, 208, 36);
+		btnEliminarDepartamento.setBounds(50, 296, 208, 36);
 		panel.add(btnEliminarDepartamento);
+		
+		lblNewLabel = new JLabel("Introduzca número de empleado");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblNewLabel.setBounds(50, 35, 240, 14);
+		panel.add(lblNewLabel);
+		
+		textField = new JTextField();
+		textField.setBounds(50, 85, 86, 20);
+		panel.add(textField);
+		textField.setColumns(10);
 
 		// Eventos
 		ActionListener showAllDepartamentosActionListener = new ActionListener() {
