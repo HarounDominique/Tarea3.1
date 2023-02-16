@@ -40,7 +40,7 @@ public class CreateNewDeptDialog extends JDialog {
 	 */
 	public void initComponents() {
 		
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 598, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -48,12 +48,12 @@ public class CreateNewDeptDialog extends JDialog {
 
 		JLabel lblDeptName = new JLabel("Nombre departamento");
 		lblDeptName.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblDeptName.setBounds(39, 34, 140, 24);
+		lblDeptName.setBounds(39, 34, 208, 24);
 		contentPanel.add(lblDeptName);
 
 		textFieldUbicacion = new JTextField();
 		textFieldUbicacion.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		textFieldUbicacion.setBounds(227, 82, 197, 23);
+		textFieldUbicacion.setBounds(330, 83, 197, 23);
 		contentPanel.add(textFieldUbicacion);
 		textFieldUbicacion.setColumns(10);
 
@@ -65,7 +65,7 @@ public class CreateNewDeptDialog extends JDialog {
 		textFieldNombreDept = new JTextField();
 		textFieldNombreDept.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		textFieldNombreDept.setColumns(10);
-		textFieldNombreDept.setBounds(227, 40, 197, 23);
+		textFieldNombreDept.setBounds(330, 35, 197, 23);
 		contentPanel.add(textFieldNombreDept);
 
 		JPanel buttonPane = new JPanel();
