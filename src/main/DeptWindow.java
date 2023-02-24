@@ -94,13 +94,13 @@ public class DeptWindow extends JFrame {
 				mensajes_text_Area.setForeground(new Color(255, 0, 0));
 				mensajes_text_Area.setFont(new Font("Monospaced", Font.PLAIN, 13));
 
-		JButton btnShowAllDepts = new JButton("Mostrar departamentos");
+		JButton btnShowAllDepts = new JButton("Mostrar cuentas");
 
 		btnShowAllDepts.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnShowAllDepts.setBounds(50, 155, 208, 36);
+		btnShowAllDepts.setBounds(50, 67, 208, 36);
 		panel.add(btnShowAllDepts);
 
-		btnModificarDepartamento = new JButton("Modificar departamento");
+		btnModificarDepartamento = new JButton("Modificar importe cuenta");
 
 		JListAllDepts = new JList<Departamento>();
 
@@ -116,31 +116,31 @@ public class DeptWindow extends JFrame {
 		panel.add(scrollPanel_in_JlistAllDepts);
 	
 
-		JButton btnCrearNuevoDepartamento = new JButton("Crear nuevo departamento");
+		JButton btnCrearNuevoDepartamento = new JButton("Crear nueva cuenta");
 
 		btnCrearNuevoDepartamento.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnCrearNuevoDepartamento.setBounds(50, 202, 208, 36);
+		btnCrearNuevoDepartamento.setBounds(50, 114, 208, 36);
 		panel.add(btnCrearNuevoDepartamento);
 
 		btnModificarDepartamento.setEnabled(false);
 		btnModificarDepartamento.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnModificarDepartamento.setBounds(50, 249, 208, 36);
+		btnModificarDepartamento.setBounds(50, 161, 208, 36);
 		panel.add(btnModificarDepartamento);
 
-		btnEliminarDepartamento = new JButton("Eliminar departamento");
+		btnEliminarDepartamento = new JButton("Eliminar cuenta");
 
 		btnEliminarDepartamento.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnEliminarDepartamento.setEnabled(false);
-		btnEliminarDepartamento.setBounds(50, 296, 208, 36);
+		btnEliminarDepartamento.setBounds(50, 208, 208, 36);
 		panel.add(btnEliminarDepartamento);
 		
-		lblNewLabel = new JLabel("Introduzca número de empleado");
+		lblNewLabel = new JLabel("Introduzca nº de empleado");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel.setBounds(50, 35, 240, 14);
+		lblNewLabel.setBounds(50, 11, 240, 14);
 		panel.add(lblNewLabel);
 		
 		textField = new JTextField();
-		textField.setBounds(50, 85, 86, 20);
+		textField.setBounds(50, 36, 183, 20);
 		panel.add(textField);
 		textField.setColumns(10);
 
