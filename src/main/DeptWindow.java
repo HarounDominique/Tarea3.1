@@ -7,6 +7,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
@@ -22,7 +24,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import exceptions.InstanceNotFoundException;
 import modelo.Departamento;
+import modelo.servicio.AccountServicio;
 import modelo.servicio.DepartamentoServicio;
 import modelo.servicio.IDepartamentoServicio;
 import javax.swing.JLabel;
@@ -46,6 +50,7 @@ public class DeptWindow extends JFrame {
 	private JButton btnEliminarDepartamento;
 	private JLabel lblNewLabel;
 	private JTextField textField;
+	private AccountServicio as;
 
 	/**
 	 * Launch the application.
@@ -139,7 +144,34 @@ public class DeptWindow extends JFrame {
 		lblNewLabel.setBounds(50, 11, 240, 14);
 		panel.add(lblNewLabel);
 		
+		//Instanciando un objeto AccountServicio a partir de su clase
+		as = new AccountServicio();
+		
 		textField = new JTextField();
+		textField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				/*
+				try {
+					as.findAccountByEmployeeId(Integer.parseInt(textField.getText()));
+				} catch (InstanceNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				*/
+				System.out.println("Hola");
+			}
+		});
+		
+		// Agregando un KeyListener para capturar la pulsación de Enter
+		textField.addKeyListener(new KeyAdapter() {
+		    public void keyPressed(KeyEvent e) {
+		        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+		            // Disparar el evento de acción cuando se presiona Enter
+		            textField.getActionListeners()[0].actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
+		        }
+		    }
+		});
+		
 		textField.setBounds(50, 36, 183, 20);
 		panel.add(textField);
 		textField.setColumns(10);

@@ -2,15 +2,18 @@ package modelo.servicio;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import exceptions.SaldoInsuficienteException;
 import modelo.AccMovement;
 import modelo.Account;
-
+import modelo.Empleado;
 import exceptions.InstanceNotFoundException;
 import util.SessionFactoryUtil;
 
@@ -100,5 +103,23 @@ public class AccountServicio implements IAccountServicio {
 		return movement;
 
 	}
+
+
+
+	@Override
+	public List<Account> findAccountByEmployeeId(int empId) throws InstanceNotFoundException {
+
+	    SessionFactory sessionFactory = SessionFactoryUtil.getSessionFactory();
+	    Session session = sessionFactory.openSession();
+
+	    List<Account> consulta = (List<Account>) session.createQuery("SELECT e.accounts FROM Empleado e WHERE e.empno = :empId")
+	            .setParameter("empId", empId)
+	            .list();
+
+	    session.close();
+
+	    return consulta;
+	}
+
 
 }
