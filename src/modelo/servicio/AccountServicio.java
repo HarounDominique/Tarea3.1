@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -120,6 +123,38 @@ public class AccountServicio implements IAccountServicio {
 
 	    return consulta;
 	}
+	
+	//Método que indica si existe un empleado dado su id o no
+	@Override
+	public boolean doesEmployeeExist(int empId, JTextArea elemento) throws InstanceNotFoundException {
+	    boolean flag = false;
+	    SessionFactory sessionFactory = SessionFactoryUtil.getSessionFactory();
+	    Session session = sessionFactory.openSession();
+	    Empleado consulta = (Empleado) session.createQuery("SELECT e FROM Empleado e WHERE e.empno = :empId")
+	            .setParameter("empId", empId)
+	            .uniqueResult();
+	    if (consulta != null) {
+	        flag = true;
+	    }
+	    if(flag) {
+	    	elemento.setText("El empleado existe");
+	    }else {
+	    	elemento.setText("El empleado no existe");
+	    }
+	    return flag;
+	}
 
+/*
+	@Override
+	public boolean doesEmployeeExist(int empId) throws InstanceNotFoundException {
+		boolean flag = true;
+		SessionFactory sessionFactory = SessionFactoryUtil.getSessionFactory();
+	    Session session = sessionFactory.openSession();
+		Empleado consulta = (Empleado) session.createQuery("SELECT e FROM Empleado e WHERE e.empno = :empId")
+	            .setParameter("empId", empId)
+	            .uniqueResult();
+		return flag;
+	}
 
+*/
 }

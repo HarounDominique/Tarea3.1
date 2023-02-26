@@ -150,15 +150,12 @@ public class DeptWindow extends JFrame {
 		textField = new JTextField();
 		textField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				/*
 				try {
-					as.findAccountByEmployeeId(Integer.parseInt(textField.getText()));
+					as.doesEmployeeExist(Integer.parseInt(textField.getText()), mensajes_text_Area);
 				} catch (InstanceNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				*/
-				System.out.println("Hola");
 			}
 		});
 		
