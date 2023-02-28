@@ -58,11 +58,11 @@ public class Empleado implements java.io.Serializable {
 		this.dept = dept;
 	}
 
-	public Empleado getEmp() {
+	public Empleado getJefe() {
 		return this.jefe;
 	}
 
-	public void setEmp(Empleado emp) {
+	public void setJefe(Empleado emp) {
 		this.jefe = emp;
 	}
 
@@ -114,11 +114,11 @@ public class Empleado implements java.io.Serializable {
 		this.accounts = accounts;
 	}
 
-	public Set<Empleado> getEmps() {
+	public Set<Empleado> getSubordinados() {
 		return this.subordinados;
 	}
 
-	public void setEmps(Set<Empleado> emps) {
+	public void setSubordinados(Set<Empleado> emps) {
 		this.subordinados = emps;
 	}
 

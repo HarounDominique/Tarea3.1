@@ -7,7 +7,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ExternalHibernate"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/HibernateLibrary"/>
-	<classpathentry kind="lib" path="D:/eclipse-workspace/MiPrimerProyectoHibernate/lib/javax.persistence_2.2.1.v201807122140.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

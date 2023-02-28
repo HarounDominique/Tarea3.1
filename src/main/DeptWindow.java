@@ -151,7 +151,11 @@ public class DeptWindow extends JFrame {
 		textField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					as.doesEmployeeExist(Integer.parseInt(textField.getText()), mensajes_text_Area);
+					if(as.doesEmployeeExist(Integer.parseInt(textField.getText()))) {
+						addMensaje(false, "El empleado existe");
+					}else {
+						addMensaje(false, "El empleado no existe");
+					}
 				} catch (InstanceNotFoundException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

@@ -126,22 +126,16 @@ public class AccountServicio implements IAccountServicio {
 	
 	//Método que indica si existe un empleado dado su id o no
 	@Override
-	public boolean doesEmployeeExist(int empId, JTextArea elemento) throws InstanceNotFoundException {
+	public boolean doesEmployeeExist(int empId) throws InstanceNotFoundException {
 	    boolean flag = false;
 	    SessionFactory sessionFactory = SessionFactoryUtil.getSessionFactory();
 	    Session session = sessionFactory.openSession();
-	    Empleado consulta = (Empleado) session.createQuery("SELECT e FROM Empleado e WHERE e.empno = :empId")
-	            .setParameter("empId", empId)
-	            .uniqueResult();
-	    if (consulta != null) {
-	        flag = true;
-	    }
-	    if(flag) {
-	    	elemento.setText("El empleado existe");
+	    Object ob = session.get(Empleado.class, empId);
+	    if(ob!=null) {
+	    	return true;
 	    }else {
-	    	elemento.setText("El empleado no existe");
+	    	return false;
 	    }
-	    return flag;
 	}
 
 /*

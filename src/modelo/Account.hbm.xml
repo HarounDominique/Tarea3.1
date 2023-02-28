@@ -6,7 +6,7 @@
             <column name="ACCOUNTNO"/>
             <generator class="identity"/>
         </id>
-        <many-to-one class="modelo.Empleado" fetch="select" name="jefe">
+        <many-to-one class="modelo.Empleado" fetch="select" name="emp">
             <column name="EMPNO" not-null="true"/>
         </many-to-one>
         <property name="amount" type="big_decimal">

@@ -16,7 +16,7 @@ public interface IAccountServicio {
 	
 	public List<Account> findAccountByEmployeeId(int empId) throws InstanceNotFoundException ;
 	
-	public boolean doesEmployeeExist(int empId, JTextArea elemento) throws InstanceNotFoundException ;
+	public boolean doesEmployeeExist(int empId) throws InstanceNotFoundException ;
 	
 	public AccMovement transferir(int accOrigen, int accDestino, double cantidad)
 			throws SaldoInsuficienteException, InstanceNotFoundException, UnsupportedOperationException ;
