@@ -25,9 +25,11 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import exceptions.InstanceNotFoundException;
+import modelo.Account;
 import modelo.Departamento;
 import modelo.servicio.AccountServicio;
 import modelo.servicio.DepartamentoServicio;
+import modelo.servicio.IAccountServicio;
 import modelo.servicio.IDepartamentoServicio;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -42,14 +44,14 @@ public class DeptWindow extends JFrame {
 	private JPanel contentPane;
 
 	private JTextArea mensajes_text_Area;
-	private JList<Departamento> JListAllDepts;
+	private JList<Account> JListAllAccounts;
 
-	private IDepartamentoServicio departamentoServicio;
+	private IAccountServicio cuentasServicio;
 	private CreateNewDeptDialog createDialog;
 	private JButton btnModificarDepartamento;
 	private JButton btnEliminarDepartamento;
 	private JLabel lblNewLabel;
-	private JTextField textField;
+	private JTextField JTextFieldEmpno;
 	private AccountServicio as;
 
 	/**
@@ -73,7 +75,7 @@ public class DeptWindow extends JFrame {
 	 */
 	public DeptWindow() {
 
-		departamentoServicio = new DepartamentoServicio();
+		cuentasServicio = new AccountServicio();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 847, 772);
@@ -91,35 +93,33 @@ public class DeptWindow extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(20, 440, 669, 228);
 		panel.add(scrollPane);
-		
-				mensajes_text_Area = new JTextArea();
-				scrollPane.setViewportView(mensajes_text_Area);
-				mensajes_text_Area.setEditable(false);
-				mensajes_text_Area.setText("Panel de mensajes");
-				mensajes_text_Area.setForeground(new Color(255, 0, 0));
-				mensajes_text_Area.setFont(new Font("Monospaced", Font.PLAIN, 13));
 
-		JButton btnShowAllDepts = new JButton("Mostrar cuentas");
+		mensajes_text_Area = new JTextArea();
+		scrollPane.setViewportView(mensajes_text_Area);
+		mensajes_text_Area.setEditable(false);
+		mensajes_text_Area.setText("Panel de mensajes");
+		mensajes_text_Area.setForeground(new Color(255, 0, 0));
+		mensajes_text_Area.setFont(new Font("Monospaced", Font.PLAIN, 13));
 
-		btnShowAllDepts.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnShowAllDepts.setBounds(50, 67, 208, 36);
-		panel.add(btnShowAllDepts);
+		JButton btnShowAllCuentas = new JButton("Mostrar cuentas");
+
+		btnShowAllCuentas.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnShowAllCuentas.setBounds(50, 67, 208, 36);
+		panel.add(btnShowAllCuentas);
 
 		btnModificarDepartamento = new JButton("Modificar importe cuenta");
 
-		JListAllDepts = new JList<Departamento>();
+		JListAllAccounts = new JList<Account>();
 
-		JListAllDepts.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		JListAllAccounts.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-		
-		JListAllDepts.setBounds(403, 37, 377, 200);
+		JListAllAccounts.setBounds(403, 37, 377, 200);
 
-		JScrollPane scrollPanel_in_JlistAllDepts = new JScrollPane(JListAllDepts);
+		JScrollPane scrollPanel_in_JlistAllDepts = new JScrollPane(JListAllAccounts);
 		scrollPanel_in_JlistAllDepts.setLocation(300, 0);
 		scrollPanel_in_JlistAllDepts.setSize(500, 250);
-		
+
 		panel.add(scrollPanel_in_JlistAllDepts);
-	
 
 		JButton btnCrearNuevoDepartamento = new JButton("Crear nueva cuenta");
 
@@ -138,22 +138,22 @@ public class DeptWindow extends JFrame {
 		btnEliminarDepartamento.setEnabled(false);
 		btnEliminarDepartamento.setBounds(50, 208, 208, 36);
 		panel.add(btnEliminarDepartamento);
-		
+
 		lblNewLabel = new JLabel("Introduzca nº de empleado");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lblNewLabel.setBounds(50, 11, 240, 14);
 		panel.add(lblNewLabel);
-		
-		//Instanciando un objeto AccountServicio a partir de su clase
+
+		// Instanciando un objeto AccountServicio a partir de su clase
 		as = new AccountServicio();
-		
-		textField = new JTextField();
-		textField.addActionListener(new ActionListener() {
+
+		JTextFieldEmpno = new JTextField();
+		JTextFieldEmpno.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					if(as.doesEmployeeExist(Integer.parseInt(textField.getText()))) {
+					if (as.doesEmployeeExist(Integer.parseInt(JTextFieldEmpno.getText()))) {
 						addMensaje(false, "El empleado existe");
-					}else {
+					} else {
 						addMensaje(false, "El empleado no existe");
 					}
 				} catch (InstanceNotFoundException e1) {
@@ -162,35 +162,36 @@ public class DeptWindow extends JFrame {
 				}
 			}
 		});
-		
+
 		// Agregando un KeyListener para capturar la pulsación de Enter
-		textField.addKeyListener(new KeyAdapter() {
-		    public void keyPressed(KeyEvent e) {
-		        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-		            // Disparar el evento de acción cuando se presiona Enter
-		            textField.getActionListeners()[0].actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
-		        }
-		    }
+		JTextFieldEmpno.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					// Disparar el evento de acción cuando se presiona Enter
+					JTextFieldEmpno.getActionListeners()[0]
+							.actionPerformed(new ActionEvent(this, ActionEvent.ACTION_PERFORMED, null));
+				}
+			}
 		});
-		
-		textField.setBounds(50, 36, 183, 20);
-		panel.add(textField);
-		textField.setColumns(10);
+
+		JTextFieldEmpno.setBounds(50, 36, 183, 20);
+		panel.add(JTextFieldEmpno);
+		JTextFieldEmpno.setColumns(10);
 
 		// Eventos
-		ActionListener showAllDepartamentosActionListener = new ActionListener() {
+		ActionListener showAllCuentasActionListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				getAllDepartamentos();
+				getAllCuentas();
 			}
 		};
-		btnShowAllDepts.addActionListener(showAllDepartamentosActionListener);
+		btnShowAllCuentas.addActionListener(showAllCuentasActionListener);
 
 		ActionListener crearListener = new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 
 				JFrame owner = (JFrame) SwingUtilities.getRoot((Component) e.getSource());
-				createDialog = new CreateNewDeptDialog(owner, "Crear nuevo departamento",
+				createDialog = new CreateNewDeptDialog(owner, "Crear nueva cuenta",
 						Dialog.ModalityType.DOCUMENT_MODAL, null);
 				showDialog();
 			}
@@ -199,16 +200,17 @@ public class DeptWindow extends JFrame {
 
 		ActionListener modificarListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int selectedIx = JListAllDepts.getSelectedIndex();
+				int selectedIx = JListAllAccounts.getSelectedIndex();
 				if (selectedIx > -1) {
-					Departamento departamento = (Departamento) JListAllDepts.getModel().getElementAt(selectedIx);
-					if (departamento != null) {
+					Account cuenta = (Account) JListAllAccounts.getModel().getElementAt(selectedIx);
+					if (cuenta != null) {
 
 						JFrame owner = (JFrame) SwingUtilities.getRoot((Component) e.getSource());
 
 						createDialog = new CreateNewDeptDialog(owner, "Modificar departamento",
-								Dialog.ModalityType.DOCUMENT_MODAL, departamento);
+								Dialog.ModalityType.DOCUMENT_MODAL, cuenta);
 						showDialog();
+						
 					}
 				}
 			}
@@ -219,31 +221,36 @@ public class DeptWindow extends JFrame {
 		ListSelectionListener selectionListListener = new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent e) {
 				if (e.getValueIsAdjusting() == false) {
-					int selectedIx = JListAllDepts.getSelectedIndex();
+					int selectedIx = JListAllAccounts.getSelectedIndex();
 					btnModificarDepartamento.setEnabled((selectedIx > -1));
 					btnEliminarDepartamento.setEnabled((selectedIx > -1));
 					if (selectedIx > -1) {
-						Departamento d = (Departamento) DeptWindow.this.JListAllDepts.getModel().getElementAt(selectedIx);
+						
+						Departamento d = (Departamento) DeptWindow.this.JListAllAccounts.getModel()
+								.getElementAt(selectedIx);
 						if (d != null) {
 							addMensaje(true, "Se ha seleccionado el d: " + d);
 						}
 					}
+					
 				}
 			}
 		};
-		JListAllDepts.addListSelectionListener(selectionListListener);
+		
+		
+		JListAllAccounts.addListSelectionListener(selectionListListener);
 
 		ActionListener deleteListener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int selectedIx = JListAllDepts.getSelectedIndex();
+				int selectedIx = JListAllAccounts.getSelectedIndex();
 				if (selectedIx > -1) {
-					Departamento d = (Departamento) JListAllDepts.getModel().getElementAt(selectedIx);
+					Departamento d = (Departamento) JListAllAccounts.getModel().getElementAt(selectedIx);
 					if (d != null) {
 						try {
 							boolean exito = departamentoServicio.delete(d.getDeptno());
 							if (exito) {
 								addMensaje(true, "Se ha eliminado el dept con id: " + d.getDeptno());
-								getAllDepartamentos();
+								getAllCuentas();
 							}
 						} catch (exceptions.InstanceNotFoundException e1) {
 							addMensaje(true, "No se ha podido borrar el departamento. No se ha encontrado con id: "
@@ -259,6 +266,7 @@ public class DeptWindow extends JFrame {
 		};
 		btnEliminarDepartamento.addActionListener(deleteListener);
 	}
+
 
 	private void addMensaje(boolean keepText, String msg) {
 		String oldText = "";
@@ -276,16 +284,17 @@ public class DeptWindow extends JFrame {
 		Departamento departamentoACrear = createDialog.getResult();
 		if (departamentoACrear != null) {
 
-			saveOrUpdate(departamentoACrear);
+			//saveOrUpdate(departamentoACrear);
 		}
 	}
 
+	
 	private void saveOrUpdate(Departamento dept) {
 		try {
 			Departamento nuevo = departamentoServicio.saveOrUpdate(dept);
 			if (nuevo != null) {
 				addMensaje(true, "Se ha creado/actualizado un departamento con id: " + nuevo.getDeptno());
-				getAllDepartamentos();
+				getAllCuentas();
 			} else {
 				addMensaje(true, " El departamento no se ha creado/actualizado correctamente");
 			}
@@ -294,16 +303,41 @@ public class DeptWindow extends JFrame {
 			addMensaje(true, "Ha ocurrido un error y no se ha podido crear el departamento");
 		}
 	}
+	
+	
+//después de modificar muchos componentes a la clase correspondiente (de Departamento a Account, casi siempre), modificamos
+//la función para que, mediante el método getEmpnoFromTextField(), se recuperen las cuentas mediante un método que ya 
+//habíamos creado anteriormente en AccountServicio (y antes, en su interfaz IAccountServicio
+	private void getAllCuentas() {
+		int numeroEmpleado = getEmpnoFromTextField();
+		if(numeroEmpleado != -1) {
+			try {
+				List<Account> cuentas = cuentasServicio.findAccountByEmployeeId(numeroEmpleado);
+				addMensaje(true, "Se han recuperado: " + cuentas.size() + " cuentas");
+				DefaultListModel<Account> defModel = new DefaultListModel<>();
+				
+				defModel.addAll(cuentas);
+				
+				JListAllAccounts.setModel(defModel);
+			}catch(Exception e) {
+				addMensaje(true, "Error. No se han podido recuperar cuentas de empleado.");
+			}
+		}else {
+			addMensaje(true, "El número de empleado no es correcto");
+		}
 
-	private void getAllDepartamentos() {
-		List<Departamento> departamentos = departamentoServicio.getAll();
-		addMensaje(true, "Se han recuperado: " + departamentos.size() + " departamentos");
-		DefaultListModel<Departamento> defModel = new DefaultListModel<>();
-
-		defModel.addAll(departamentos);
-
-		JListAllDepts.setModel(defModel);
-
+	}
+//creamos una función que extrae del JTextFieldEmpno su contenido (el núemero de empleado del cual recuperar las cuentas
+//inicialmente inicializa la variable que contendrá el Empno a -1; esto es para que, en caso de error, la función devuelva -1
+	private int getEmpnoFromTextField() {
+		int empno = -1;
+		String textIntroducido = JTextFieldEmpno.getText().trim();
+		try {
+			empno = Integer.parseInt(textIntroducido);
+		} catch (Exception nfe) {
+			empno = -1;
+		}
+		return empno;
 	}
 
 }
